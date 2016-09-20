@@ -1,2 +1,2 @@
 # c
-Contains C programs
+This repo contains C implementations of basic data structures / alogorithms and programming concepts. 
