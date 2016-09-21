@@ -1,4 +1,4 @@
-/*
+/
  * Author:      William Chia-Wei Cheng (bill.cheng@acm.org)
  *
  * @(#)$Id: listtest.c,v 1.1 2012/12/24 23:18:19 william Exp $
@@ -307,13 +307,19 @@ void DoTest()
     int num_items=64;
     List list, list2;
 
+    
+    if (gnDebug > 0) printf("-->Starting DoTest()\n");
     memset(&list, 0, sizeof(List));
     memset(&list2, 0, sizeof(List));
     (void)ListInit(&list);
     (void)ListInit(&list2);
 
     CreateTestList(&list, num_items);
+    if (gnDebug > 0) printf("after CreatTestList()\n");
+    if (gnDebug > 0) PrintTestList(&list, num_items);
+    if (gnDebug > 0) printf("after printTestList()\n");
     RandomShuffle(&list, num_items);
+    if (gnDebug > 0) printf("after TestList\n");
     FindAllInList(&list, num_items);
     CopyTestList(&list, &list2);
 
