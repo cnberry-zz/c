@@ -27,11 +27,17 @@ It is a fun problem which can include the concepts below:
   3. Last-In-First-Out (LIFO)
   4. processing null terminated strings
   5. malloc/free
-  6. recursion (not implemented here)
+  6. recursion 
+
+Since there are two main (maybe more?) ways to do this, application
+managed memory using a linked list, or compiler/os managed memory
+using the stack and recursion, I did both (although, I only implemented
+the linked list method during the interview...)
 
 To use:
 
-  $ gcc main.c
+  $ gcc listBracket.c 
+  $ gcc recursiveBracket.c
 
 then pass the string in as an arguement:
 
