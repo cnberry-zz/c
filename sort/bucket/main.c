@@ -42,6 +42,7 @@ int main (int argc, char **argv) {
   }  
   printf("\n");
 
+  /* call the sort */
   bucketSort(data,sizeof data);
   
   exit (0);
