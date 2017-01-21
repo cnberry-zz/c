@@ -1,30 +1,36 @@
 /* basic directed graph type */
 
-typedef struct graph *Graph;
+#define MAX_NUM_VERTICES (500)
 
-/* create a new graph with n vertices labeled 0..n-1 and no edges */
-Graph graph_create(int n);
+typedef struct listnode {
+    void *obj;
+    int weight; 
+    struct listnode *next; 
+} ListNode;
 
-/* free all space used by graph */
-void graph_destroy(Graph);
+typedef struct vertex {
+    int topNum;
+    int visited;
+    int indegree;
+    int outdegree;
+    ListNode *alist;
+} Vertex;
 
-/* add an edge to an existing graph */
-/* doing this more than once may have unpredictable results */
-void graph_add_edge(Graph, int source, int sink);
+typedef struct graph {
+    int v;              /* number of vertices */
+    int e;              /* number of edges */
+    int isSorted;	/* set to 1 if graph is in topological order */
+    Vertex *vlist[MAX_NUM_VERTICES]; /* array of vertices */
+} Graph;
 
-/* return the number of vertices/edges in the graph */
-int graph_vertex_count(Graph);
-int graph_edge_count(Graph);
+/*----- Graph methods ----*/
+Graph * graph_create(int n);	/* create a new graph with n vertices labeled 0..n-1 and no edges */
+void graph_destroy(Graph *g);	/* free all space used by graph */
+void graph_add_edge(Graph *g, int source, int sink, int weight);	/* add an edge to an existing graph */
+void graph_print(Graph *g);	/* print out adjacency list */
+void graph_swap_vertices(Graph *g, int u, int v);	/* swap two vertices in array */
 
-/* return the out-degree of a vertex */
-int graph_out_degree(Graph, int source);
+/*----- List methods ----*/
+void list_destroy(ListNode *l); /* destroy all nodes in linked list */
+ListNode * list_add(ListNode *l, void *obj, int weight); /* create a new list node and add it in front of l, return new node */
 
-/* return 1 if edge (source, sink) exists), 0 otherwise */
-int graph_has_edge(Graph, int source, int sink);
-
-/* invoke f on all edges (u,v) with source u */
-/* supplying data as final parameter to f */
-/* no particular order is guaranteed */
-void graph_foreach(Graph g, int source,
-        void (*f)(Graph g, int source, int sink, void *data),
-        void *data);
